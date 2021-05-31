@@ -1,15 +1,15 @@
 from mpi4py import MPI
+from collections import deque
 import logging
 
 
 class Boss:
 
-    def __init__(self, taskInputs=taskArgList,
-            analyzer=analyzer, comm=MPI.COMM_WORLD,
+    def __init__(self, taskInputs, analyzer, comm=MPI.COMM_WORLD,
             logLevel=logging.INFO):
 
         self.comm = comm
-        self.taskArgList = taskArgList
+        self.taskArgList = taskInputs
         self.analyzer = analyzer
         logging.basicConfig(format='[Boss] %(message)s',
             level=logLevel)
@@ -58,10 +58,10 @@ class Boss:
                 reply = pendingReplies[index]
                 workerRank = replySources[index]
                 logging.debug('got msg=[{}] from worker [{}]'
-                    .format(contents, workerRank))
+                    .format(result, workerRank))
 
                 # Send the result to the analyzer
-                analyzer.acceptResult(result)
+                self.analyzer.acceptResult(result)
 
                 # Clear the reply out of the pending list
                 pendingReplies.remove(reply)

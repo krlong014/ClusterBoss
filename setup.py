@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="ClusterBoss", # Replace with your own username
+    name="ClusterBoss", 
     version="0.1",
     author="Katharine Long",
     author_email="katharine.long@ttu.edu",

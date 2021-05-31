@@ -28,9 +28,9 @@ class Worker:
                 arg = msg[1]
                 logging.debug('starting task with arg=[{}]'.format(arg))
                 # Do the work
-                self.func.run(arg)
+                result = self.func.run(arg)
                 logging.debug('finished task')
                 # Send results back to the manager
-                self.comm.isend('COMPLETED', dest=0, tag=2)
+                self.comm.isend(result, dest=0, tag=2)
             else:
                 logging.error('Unknown message {}'.format(msg))
