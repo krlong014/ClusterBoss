@@ -1,0 +1,8 @@
+*.o
+*.exe
+*.aux
+*~
+.DS_Store
+.#
+*.pyc
+__pycache__
